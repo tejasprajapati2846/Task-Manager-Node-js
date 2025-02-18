@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script>
+    async function logout() {
+      const response = await fetch('/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        window.location.href = '/login';
+      } else {
+        console.log('Logout failed');
+      }
+    }
+  </script>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800 font-sans">
+
+  <header class="bg-blue-500 text-white p-4 shadow-lg">
+    <nav class="container mx-auto flex justify-between items-center">
+      <h1 class="text-lg font-bold">Task Manager</h1>
+
+      <div class="lg:flex hidden space-x-4">
+        <a href="/list" class="mx-2 text-white no-underline">View Tasks</a>
+        <a href="/add" class="mx-2 text-white no-underline">Add Task</a>
+
+        <div class="relative">
+          <a href="#" class="mx-2 text-white no-underline">
+            <span>{{username}}</span>
+            <i class="fas fa-caret-down"></i>
+          </a>
+
+          <div class="absolute right-0 hidden bg-white text-black rounded-md mt-2 w-40 shadow-lg dropdown-menu">
+            <a href="/profile" class="block px-4 py-2">Profile</a>
+            <a href="#" onclick="logout()" class="block px-4 py-2">Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:hidden flex items-center">
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-white">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="lg:hidden hidden">
+      <div class="flex flex-col mt-4 bg-blue-500 p-4">
+        <a href="/list" class="text-white py-2">View Tasks</a>
+        <a href="/add" class="text-white py-2">Add Task</a>
+        <a href="/profile" class="text-white py-2">Profile</a>
+        <a href="#" onclick="logout()" class="text-white py-2">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 container mx-auto mt-6 p-4">

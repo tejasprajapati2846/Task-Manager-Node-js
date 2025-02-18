@@ -1,0 +1,61 @@
+{{> header}}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-6 text-center">Your Profile</h2>
+    
+    {{#if error}}
+    <div class="bg-green-500 text-white p-4 rounded mb-4">
+        {{error}}
+    </div>
+    {{/if}}
+    
+    {{#if message}}
+    <div class="bg-red-500 text-white p-4 rounded mb-4">
+        {{message}}
+    </div>
+    {{/if}}
+
+
+    <form action="/update-profile" method="POST" class="space-y-6">
+        <div class="space-y-2">
+            <label for="username" class="block font-semibold">Username</label>
+            <input type="text" name="name" id="username" value="{{username}}"
+                class="w-full p-3 border border-gray-300 rounded-md" />
+        </div>
+
+        <div class="space-y-2">
+            <label for="email" class="block font-semibold">Email</label>
+            <input type="email" name="email" id="email" value="{{email}}"
+                class="w-full p-3 border border-gray-300 rounded-md" disabled />
+        </div>
+
+        <div class="space-y-2">
+            <label for="age" class="block font-semibold">Age</label>
+            <input type="text" name="age" id="age" value="{{age}}"
+                class="w-full p-3 border border-gray-300 rounded-md" />
+        </div>
+
+        <div class="space-y-2">
+            <h3 class="font-semibold">Change Password</h3>
+
+            <label for="currentPassword" class="block">Current Password</label>
+            <input type="password" name="currentPassword" id="currentPassword"
+                class="w-full p-3 border border-gray-300 rounded-md" required />
+
+            <label for="newPassword" class="block mt-4">New Password</label>
+            <input type="password" name="newPassword" id="newPassword"
+                class="w-full p-3 border border-gray-300 rounded-md" required />
+        </div>
+
+        <button type="submit"
+            class="w-full bg-blue-500 text-white py-3 rounded-md font-semibold hover:bg-blue-600">Update
+            Profile</button>
+    </form>
+
+    <form action="/delete-account" method="POST" class="mt-8 text-center">
+        <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-md font-semibold hover:bg-red-600">Delete
+            Account</button>
+    </form>
+</div>
+</main>
+
+{{> footer}}

@@ -1,0 +1,40 @@
+{{> header}}
+
+<h1 class="text-3xl font-bold mb-4 text-center">{{title}}</h1>
+<div class="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto">
+  <form action="/add-task" method="POST">
+    <div class="mb-4">
+      <label for="task-title" class="block text-sm font-semibold text-gray-700">Task Title:</label>
+      <input type="text" id="task-title" name="title" required
+        class="w-full border border-gray-400 rounded-lg p-2 mt-1 focus:ring-blue-500 focus:border-blue-500">
+    </div>
+
+    <div class="mb-4">
+      <label for="task-desc" class="block text-sm font-semibold text-gray-700">Task Description:</label>
+      <textarea id="task-desc" name="description" required rows="4"
+        class="w-full border border-gray-400 rounded-lg p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label for="task-date" class="block text-sm font-semibold text-gray-700">Task Date:</label>
+      <input type="date" id="task-date" name="date" required
+        class="w-full border border-gray-400 rounded-lg p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+        value="{{defaultDate}}">
+    </div>
+
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+      Add Task
+    </button>
+  </form>
+</div>
+
+<div class="text-center mt-6">
+  <a href="/list" class="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">Back to Home</a>
+</div>
+
+<script>
+  document.getElementById('task-date').valueAsDate = new Date();
+</script>
+
+{{> footer}}
