@@ -3,13 +3,13 @@ const router = new express.Router();
 const User = require("../models/user");
 const auth = require('../middleware/auth');
 const bcrypt = require('bcrypt');
-const sendVerificationEmail = require("../emails/verification");
+const agenda = require("../agenda");
 
 router.post("/user", async (req, res) => {
     try {
         const user = new User(req.body);
         await user.save();
-        await sendVerificationEmail(user);
+        await agenda.now("send verification email", { user });
         req.flash("success", "Registration successful. Check your email for verification.");
         res.redirect('/register');
     } catch (e) {
