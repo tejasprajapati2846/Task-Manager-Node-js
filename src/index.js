@@ -27,13 +27,14 @@ app.use(
 app.use(express.json());
 app.use(flash());
 app.use(cookieParser());
-app.use(userRoute);
-app.use(taskRoute);
-app.use(authRoute);
 
 app.get('/', (req, res) => {
   res.redirect('/list');
 });
+
+app.use(userRoute);
+app.use(taskRoute);
+app.use(authRoute);
 
 app.use((req, res, next) => {
   res.locals.error = req.flash("error");
